@@ -1,112 +1,114 @@
-// main.js
+// Function to save the username to local storage
+function saveUsernameToLocalStorage(username) {
+    localStorage.setItem('username', username);
+}
 
-// Base URL for the backend
-const BASE_URL = 'https://dummy-backend-gyc3.onrender.com/public';
+// Function to display messages to the user
+function showMessage(message) {
+    alert(message);
+}
 
-// Sign Up Form Submission
-document.getElementById('signupForm')?.addEventListener('submit', function (e) {
-    e.preventDefault();
-
+// Function to handle signup
+document.getElementById('signupBtn')?.addEventListener('click', function () {
     const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    // Send data to backend for sign-up
-    fetch(`${BASE_URL}/signup.php`, {
+    fetch('https://dummy-backend-gyc3.onrender.com/public/signup.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `username=${username}&email=${email}&password=${password}`,
+        body: `username=${encodeURIComponent(username)}&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`,
     })
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
-                // Show OTP popup
-                document.getElementById('otpPopup').style.display = 'flex';
+                saveUsernameToLocalStorage(username);
+                showMessage(data.message);
+                // Redirect to OTP verification page
+                document.getElementById('otpVerification').style.display = 'block';
             } else {
-                alert(data.message);
+                showMessage(data.message);
             }
         })
         .catch(error => console.error('Error:', error));
 });
 
-// OTP Verification
+// Function to handle OTP verification
 document.getElementById('verifyOtpBtn')?.addEventListener('click', function () {
-    const email = document.getElementById('email').value; // Assuming email is stored or inputted somewhere
+    const email = localStorage.getItem('email'); // Assuming email was saved during signup
     const otp = document.getElementById('otp').value;
 
-    // Send OTP and email to the backend for verification
     fetch('https://dummy-backend-gyc3.onrender.com/public/verify-otp.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `email=${encodeURIComponent(email)}&otp=${encodeURIComponent(otp)}`,
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok.');
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
-                window.location.href = 'dashboard.html'; // Redirect to dashboard
+                showMessage(data.message);
+                // Redirect to the dashboard
+                window.location.href = 'dashboard.html';
             } else {
-                alert(data.message);
+                showMessage(data.message);
             }
         })
         .catch(error => console.error('Error:', error));
 });
 
-// Login Form Submission
-document.getElementById('loginForm')?.addEventListener('submit', function (e) {
-    e.preventDefault();
+// Function to handle login
+document.getElementById('loginBtn')?.addEventListener('click', function () {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
-    const email = document.getElementById('loginEmail').value;
-    const password = document.getElementById('loginPassword').value;
-
-    // Send login request to backend
-    fetch(`${BASE_URL}/login.php`, {
+    fetch('https://dummy-backend-gyc3.onrender.com/public/login.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `email=${email}&password=${password}`,
+        body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`,
     })
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
-                localStorage.setItem('username', data.username); // Store username
-                window.location.href = 'dashboard.html'; // Redirect to dashboard
+                const username = data.username; // Ensure backend sends username in response
+                saveUsernameToLocalStorage(username);
+                localStorage.setItem('email', email); // Save email to use for OTP verification
+                showMessage(data.message);
+                // Redirect to dashboard
+                window.location.href = 'dashboard.html';
             } else {
-                alert(data.message);
+                showMessage(data.message);
             }
         })
         .catch(error => console.error('Error:', error));
 });
 
-// Display Username on Dashboard
-document.addEventListener('DOMContentLoaded', function () {
+// Display username on the dashboard
+window.addEventListener('DOMContentLoaded', function () {
     const username = localStorage.getItem('username');
     if (username) {
-        document.getElementById('usernameDisplay').textContent = username;
+        document.getElementById('displayUsername').textContent = username;
+    } else {
+        document.getElementById('displayUsername').textContent = 'User';
     }
 });
 
-// Delete Account
+// Function to handle account deletion
 document.getElementById('deleteAccountBtn')?.addEventListener('click', function () {
-    const email = localStorage.getItem('email'); // Assuming email is stored in localStorage
-    const password = prompt('Enter your password to confirm deletion:');
+    const email = localStorage.getItem('email');
 
-    fetch(`${BASE_URL}/delete_account.php`, {
+    fetch('https://dummy-backend-gyc3.onrender.com/public/delete_account.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `email=${email}&password=${password}`,
+        body: `email=${encodeURIComponent(email)}`,
     })
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
-                alert('Account deleted successfully.');
-                localStorage.clear();
-                window.location.href = 'index.html'; // Redirect to sign-up page
+                showMessage(data.message);
+                localStorage.clear(); // Clear local storage on successful deletion
+                window.location.href = 'index.html'; // Redirect to homepage
             } else {
-                alert(data.message);
+                showMessage(data.message);
             }
         })
         .catch(error => console.error('Error:', error));
