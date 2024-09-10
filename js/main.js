@@ -31,15 +31,21 @@ document.getElementById('signupForm')?.addEventListener('submit', function (e) {
 
 // OTP Verification
 document.getElementById('verifyOtpBtn')?.addEventListener('click', function () {
+    const email = document.getElementById('email').value; // Assuming email is stored or inputted somewhere
     const otp = document.getElementById('otp').value;
 
-    // Send OTP to backend for verification
-    fetch(`${BASE_URL}/verify-otp.php`, {
+    // Send OTP and email to the backend for verification
+    fetch('https://dummy-backend-gyc3.onrender.com/public/verify-otp.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `otp=${otp}`,
+        body: `email=${encodeURIComponent(email)}&otp=${encodeURIComponent(otp)}`,
     })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            return response.json();
+        })
         .then(data => {
             if (data.status === 'success') {
                 window.location.href = 'dashboard.html'; // Redirect to dashboard
