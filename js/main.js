@@ -34,7 +34,7 @@ document.getElementById('verifyOtpBtn')?.addEventListener('click', function () {
     const otp = document.getElementById('otp').value;
 
     // Send OTP to backend for verification
-    fetch(`${BASE_URL}/verify_otp.php`, {
+    fetch(`${BASE_URL}/verify-otp.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `otp=${otp}`,
