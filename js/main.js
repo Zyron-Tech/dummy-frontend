@@ -10,7 +10,23 @@ function saveEmailToLocalStorage(email) {
 
 // Function to display messages to the user
 function showMessage(message) {
-    alert(message);
+    const messageContainer = document.createElement('div');
+    messageContainer.style.position = 'fixed';
+    messageContainer.style.bottom = '20px';
+    messageContainer.style.left = '50%';
+    messageContainer.style.transform = 'translateX(-50%)';
+    messageContainer.style.backgroundColor = '#333';
+    messageContainer.style.color = '#fff';
+    messageContainer.style.padding = '10px 20px';
+    messageContainer.style.borderRadius = '5px';
+    messageContainer.style.zIndex = '1000';
+    messageContainer.textContent = message;
+    
+    document.body.appendChild(messageContainer);
+    
+    setTimeout(() => {
+        document.body.removeChild(messageContainer);
+    }, 3000);
 }
 
 // Function to handle signup
@@ -132,14 +148,15 @@ document.getElementById('deleteAccountBtn')?.addEventListener('click', function 
         });
 });
 
-const sign_in_btn = document.querySelector("#sign-in-btn");
-const sign_up_btn = document.querySelector("#sign-up-btn");
+// Toggle sign-in and sign-up forms
+const signInBtn = document.querySelector("#sign-in-btn");
+const signUpBtn = document.querySelector("#sign-up-btn");
 const container = document.querySelector(".container");
 
-sign_up_btn.addEventListener('click', () =>{
+signUpBtn.addEventListener('click', () => {
     container.classList.add("sign-up-mode");
 });
 
-sign_in_btn.addEventListener('click', () =>{
+signInBtn.addEventListener('click', () => {
     container.classList.remove("sign-up-mode");
 });
