@@ -97,7 +97,7 @@ document.getElementById('loginBtn')?.addEventListener('click', function () {
         .then(response => response.json())
         .then(data => {
             if (data?.status === 'success') {
-                const username = data.username; // Ensure backend sends username in response
+                const username = data.username; // Use the username from the response
                 saveUsernameToLocalStorage(username);
                 saveEmailToLocalStorage(email); // Save email to use for OTP verification
                 showMessage(data.message);
