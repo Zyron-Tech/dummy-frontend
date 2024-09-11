@@ -146,12 +146,11 @@ document.getElementById('deleteAccountBtn')?.addEventListener('click', function 
             console.error('Error:', error);
             showMessage('An error occurred during account deletion.');
         });
+});
 
 // Toggle sign-in and sign-up forms
 const signInBtn = document.querySelector("#sign-in-btn");
 const signUpBtn = document.querySelector("#sign-up-btn");
-const goToSignInLink = document.querySelector("#go-to-signin");
-const goToSignUpLink = document.querySelector("#go-to-signup");
 const container = document.querySelector(".container");
 
 signUpBtn.addEventListener('click', () => {
@@ -160,14 +159,4 @@ signUpBtn.addEventListener('click', () => {
 
 signInBtn.addEventListener('click', () => {
     container.classList.remove("sign-up-mode");
-});
-
-goToSignInLink.addEventListener('click', (event) => {
-    event.preventDefault();
-    container.classList.remove("sign-up-mode");
-});
-
-goToSignUpLink.addEventListener('click', (event) => {
-    event.preventDefault();
-    container.classList.add("sign-up-mode");
 });
