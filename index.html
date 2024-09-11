@@ -4,8 +4,236 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SignIn & SignUp</title>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
     <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f2f5;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            min-height: 600px;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+        }
+
+        .forms-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            transition: 0.6s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .signin-signup {
+            width: 100%;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 0 40px;
+        }
+
+        form h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .input-field {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 350px;
+            height: 45px;
+            border-bottom: 2px solid #adadad;
+        }
+
+        .input-field i {
+            position: absolute;
+            color: #333;
+            font-size: 18px;
+            padding: 10px;
+        }
+
+        .input-field input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 10px 15px 10px 35px;
+            font-size: 14px;
+        }
+
+        .btn {
+            width: 150px;
+            height: 40px;
+            border: none;
+            border-radius: 20px;
+            background: #ff4b2b;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #ff6f47;
+        }
+
+        .social-text {
+            margin: 10px 0;
+            font-size: 12px;
+        }
+
+        .social-media {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icon {
+            height: 40px;
+            width: 40px;
+            border: 1px solid #adadad;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .social-icon:hover {
+            border-color: #ff4b2b;
+        }
+
+        .panels-container {
+            position: absolute;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.6s ease-in-out;
+        }
+
+        .panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .panel img {
+            width: 100%;
+            max-width: 250px;
+        }
+
+        .panel .content h3 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .panel .content p {
+            margin: 10px 0;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .panel button {
+            border: none;
+            border-radius: 20px;
+            background: transparent;
+            color: #ff4b2b;
+            border: 1px solid #ff4b2b;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .panel button:hover {
+            background: #ff4b2b;
+            color: #fff;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: #fff;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .modal-content h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .modal-content button {
+            width: 100%;
+            padding: 10px;
+            background: #ff4b2b;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal-content button:hover {
+            background: #ff6f47;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
