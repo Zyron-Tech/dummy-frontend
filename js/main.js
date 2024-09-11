@@ -126,12 +126,14 @@ window.addEventListener('DOMContentLoaded', function () {
 // Function to handle account deletion
 document.getElementById('deleteAccountBtn')?.addEventListener('click', function () {
     const email = localStorage.getItem('email');
+    const password = prompt('Please enter your password to confirm deletion:');
 
-    fetch('https://dummy-backend-gyc3.onrender.com/public/delete_account.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `email=${encodeURIComponent(email)}`,
-    })
+    if (password) {
+        fetch('https://dummy-backend-gyc3.onrender.com/public/delete_account.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`,
+        })
         .then(response => response.json())
         .then(data => {
             if (data?.status === 'success') {
@@ -146,6 +148,9 @@ document.getElementById('deleteAccountBtn')?.addEventListener('click', function 
             console.error('Error:', error);
             showMessage('An error occurred during account deletion.');
         });
+    } else {
+        showMessage('Password is required to confirm deletion.');
+    }
 });
 
 // // Toggle sign-in and sign-up forms
