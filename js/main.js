@@ -28,12 +28,24 @@ function showMessage(message) {
         document.body.removeChild(messageContainer);
     }, 3000);
 }
+// Function to display a loading message
+function showLoadingMessage() {
+    document.getElementById('loadingMessage').style.display = 'block';
+}
+
+// Function to hide the loading message
+function hideLoadingMessage() {
+    document.getElementById('loadingMessage').style.display = 'none';
+}
 
 // Function to handle signup
 document.getElementById('signupBtn')?.addEventListener('click', function () {
     const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+
+    // Show loading message
+    showLoadingMessage();
 
     fetch('https://dummy-backend-gyc3.onrender.com/public/signup.php', {
         method: 'POST',
@@ -42,6 +54,9 @@ document.getElementById('signupBtn')?.addEventListener('click', function () {
     })
         .then(response => response.json())
         .then(data => {
+            // Hide loading message
+            hideLoadingMessage();
+
             if (data?.status === 'success') {
                 saveUsernameToLocalStorage(username);
                 saveEmailToLocalStorage(email); // Save email to use for OTP verification
@@ -53,6 +68,9 @@ document.getElementById('signupBtn')?.addEventListener('click', function () {
             }
         })
         .catch(error => {
+            // Hide loading message
+            hideLoadingMessage();
+            
             console.error('Error:', error);
             showMessage('An error occurred. Please try again.');
         });
