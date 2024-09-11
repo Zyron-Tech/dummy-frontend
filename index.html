@@ -2,106 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SignIn & SignUp</title>
+    <title>Sign In / Sign Up</title>
     <link rel="stylesheet" type="text/css" href="./css/styles.css" />
-    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container">
-        <div class="forms-container">
-            <div class="signin-signup">
-                <!-- Sign In Form -->
-                <form id="loginForm" class="sign-in-form">
-                    <h2 class="title">Sign In</h2>
-                    <div class="input-field">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" id="loginEmail" placeholder="Email" required />
-                    </div>
-                    <div class="input-field">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" id="loginPassword" placeholder="Password" required />
-                    </div>
-                    <input type="button" value="Login" id="loginBtn" class="btn solid" />
-                    <p class="social-text">Or Sign in with social platforms</p>
-                    <div class="social-media">
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-google"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </form>
-
-                <!-- Sign Up Form -->
-                <form id="signupForm" class="sign-up-form">
-                    <h2 class="title">Sign Up</h2>
-                    <div class="input-field">
-                        <i class="fas fa-user"></i>
-                        <input type="text" id="username" placeholder="Username" required />
-                    </div>
-                    <div class="input-field">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" id="email" placeholder="Email" required />
-                    </div>
-                    <div class="input-field">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" id="password" placeholder="Password" required />
-                    </div>
-                    <input type="button" value="Sign Up" id="signupBtn" class="btn solid" />
-                    <p class="social-text">Or Sign up with social platforms</p>
-                    <div class="social-media">
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-google"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </form>
+        <!-- Sign Up Panel -->
+        <div class="panel left-panel">
+            <div class="content">
+                <h3>Create an Account</h3>
+                <p>Enter your details to sign up.</p>
+                <button id="sign-up-btn">Sign Up</button>
+                <p>Already have an account? <a href="#" id="go-to-signin">Sign In</a></p>
+            </div>
+            <div class="image">
+                <img src="sign-up-image.png" alt="Sign Up Image" />
             </div>
         </div>
 
-        <div class="panels-container">
-            <div class="panel left-panel">
-                <div class="content">
-                    <h3>New here?</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio minus natus est.</p>
-                    <button class="btn transparent" id="sign-up-btn">Sign Up</button>
-                </div>
-                <img src="./img/log.svg" class="image" alt="">
+        <!-- Sign In Panel -->
+        <div class="panel right-panel">
+            <div class="content">
+                <h3>Welcome Back!</h3>
+                <p>Enter your credentials to sign in.</p>
+                <button id="sign-in-btn">Sign In</button>
+                <p>Don't have an account? <a href="#" id="go-to-signup">Sign Up</a></p>
             </div>
-
-            <div class="panel right-panel">
-                <div class="content">
-                    <h3>One of us?</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio minus natus est.</p>
-                    <button class="btn transparent" id="sign-in-btn">Sign In</button>
-                </div>
-                <img src="./img/register.svg" class="image" alt="">
+            <div class="image">
+                <img src="sign-in-image.png" alt="Sign In Image" />
             </div>
         </div>
     </div>
 
-    <!-- OTP Verification Popup -->
+    <!-- Modal for OTP Verification -->
     <div id="otpPopup" class="modal" style="display: none;">
         <div class="modal-content">
-            <h3>Enter OTP</h3>
-            <input type="text" id="otpCode" placeholder="Enter OTP" required />
-            <button id="verifyOtpBtn">Verify OTP</button>
+            <h3>Verify Your OTP</h3>
+            <input type="text" id="otpCode" placeholder="Enter OTP" />
+            <button id="verifyOtpBtn">Verify</button>
         </div>
     </div>
 
